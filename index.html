@@ -915,12 +915,17 @@ renderGlance();
 
 
 /* ============ Admin Login ============ */
+/* ============ Admin Login ============ */
 function adminLogin(){
   const pass = prompt("Enter Admin Password:");
   if(pass === "sports2026") { 
-    // REPLACE THIS LINK WITH YOUR ACTUAL GOOGLE SHEET EDIT LINK
+    
+    // নিচে আপনার আসল গুগল শিটের লিংক দিন
     const sheetEditLink = "https://docs.google.com/spreadsheets/d/1bR9Gj78NYgheco-FiSU6FdPtA4uBMTxtqadquB6kDo0/edit?gid=1510107305#gid=1510107305"; 
-    window.open(sheetEditLink, "_blank");
+    
+    // পপ-আপ ব্লকার এড়াতে একই ট্যাবে খোলার কমান্ড:
+    window.location.href = sheetEditLink;
+    
   } else if(pass !== null) {
     alert("❌ Incorrect Password! You are not authorized.");
   }
