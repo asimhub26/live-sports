@@ -871,11 +871,12 @@ async function fetchLive(silent){
     try{
       text = await tryFetchText(url);
     }catch(directErr){
-      /* fallback: many browsers block direct cross-origin fetch of Google's CSV
-         export, especially when this dashboard is opened as a local file.
-         Retry through a public CORS proxy before giving up. */
-      const proxied = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-      text = await tryFetchText(proxied);
+      /* Force proxy to fetch fresh data every time by appending timestamp to Target URL */
+      const bustedUrl = url + (url.includes('?') ? '&' : '?') + '_cb=' + Date.now();
+      const proxied = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(bustedUrl);
+      const res = await fetch(proxied, {cache:'no-store'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      text = await res.text();
     }
     liveResults = csvToResultRows(text);
     setLiveStatus(true, 'Connected — last updated ' + new Date().toLocaleTimeString());
