@@ -700,9 +700,9 @@ function canonicalZone(raw){
   const l = raw.toLowerCase();
   if(l.includes('thaku')){ if(l.includes('1')) return 'Thaku 1'; if(l.includes('2')) return 'Thaku 2'; }
   if(l.includes('ghosh') || l.startsWith('gh')){
-    if(l.includes('uttar')) return 'Ghoshpur Uttar';
-    if(l.includes('madh')) return 'Ghoshpur Madhya';
-    if(l.includes('pasch') || l.includes('pashch')) return 'Ghoshpur Paschim';
+    if(l.includes('uttar')) return 'Ghosh Uttar';
+    if(l.includes('madh')) return 'Ghosh Madhya';
+    if(l.includes('pasch') || l.includes('pashch')) return 'Ghosh Paschim';
   }
   if(l.includes('kishor')){ if(l.includes('1')) return 'Kishorepur 1'; if(l.includes('2')) return 'Kishorepur 2'; }
   return 'Other';
