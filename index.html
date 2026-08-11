@@ -698,7 +698,7 @@ const ZONES = ['Thakuranichak 1','Thakuranichak 2','Ghoshpur Uttar','Ghoshpur Ma
 function canonicalZone(raw){
   if(!raw) return 'Other';
   const l = raw.toLowerCase();
-  if(l.includes('thaku')){ if(l.includes('1')) return 'Thakuranichak 1'; if(l.includes('2')) return 'Thakuranichak 2'; }
+  if(l.includes('thaku')){ if(l.includes('1')) return 'Thaku 1'; if(l.includes('2')) return 'Thakuranichak 2'; }
   if(l.includes('ghosh') || l.startsWith('gh')){
     if(l.includes('uttar')) return 'Ghoshpur Uttar';
     if(l.includes('madh')) return 'Ghoshpur Madhya';
