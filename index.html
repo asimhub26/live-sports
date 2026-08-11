@@ -498,12 +498,21 @@ function renderPersonCards(){
   const g = document.getElementById('fltGroup').value;
   const ge = document.getElementById('fltGender').value;
   const q = document.getElementById('fltSearch').value.trim().toLowerCase();
+  
   let list = PEOPLE.filter(p=>{
     if(g && p.group!==g) return false;
     if(ge && p.gender!==ge) return false;
-    if(q && !((p.name||'').toLowerCase().includes(q) || (p.school||'').toLowerCase().includes(q) || String(p.chest||'').toLowerCase().includes(q))) return false;
-
+    
+    // Name, School or Chest No Search Logic
+    const matchName = (p.name || '').toLowerCase().includes(q);
+    const matchSchool = (p.school || '').toLowerCase().includes(q);
+    const matchChest = (p.chest ? String(p.chest).toLowerCase() : '').includes(q);
+    
+    if(q && !(matchName || matchSchool || matchChest)) return false;
+    
+    return true;
   });
+
   document.getElementById('pcardGrid').innerHTML = list.map((p,i)=>{
     const c1 = CARD_PALETTE[i % CARD_PALETTE.length];
     const c2 = CARD_PALETTE[(i+2) % CARD_PALETTE.length];
@@ -517,6 +526,7 @@ function renderPersonCards(){
     </div>`;
   }).join('') || `<div class="empty" style="grid-column:1/-1;">No participants found</div>`;
 }
+
 
 function populateFilterOptions(){
   const groups = [...new Set(PEOPLE.map(p=>p.group))].sort();
