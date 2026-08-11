@@ -213,7 +213,7 @@ th{
   font-family:'IBM Plex Sans',sans-serif;
 }
 th:first-child{border-radius:8px 0 0 0;} th:last-child{border-radius:0 8px 0 0;}
-td{padding:8px 10px; border-bottom:1px solid var(--line); font-family:'IBM Plex Sans',sans-serif;text-align:center;}
+td{padding:8px 10px; border-bottom:1px solid var(--line); font-family:'IBM Plex Sans',sans-serif; text-align:center;}
 tbody tr:nth-child(even){background:#FAF7EF;}
 tbody tr:hover{background:#FFF3DF;}
 .pos-badge{
@@ -262,7 +262,7 @@ tbody tr:hover{background:#FFF3DF;}
 .zonebox b{display:block;font-size:12px;color:var(--navy);margin-bottom:3px;}
 .zonebox span{font-size:12px;color:var(--ink-soft);}
 .judge-tbl{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12.5px;}
-.judge-tbl th,.judge-tbl td{border:1px solid #333;padding:6px 8px;text-align:center;}
+.judge-tbl th,.judge-tbl td{border:1px solid #333;padding:6px 8px;text-align:center; white-space: nowrap;}
 .judge-tbl thead th{background:#F0F0F0;font-weight:700;color:var(--navy);}
 .judge-tbl td:first-child{text-align:left;font-weight:600;background:#FAFAFA;}
 .js-positions{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
@@ -309,7 +309,7 @@ footer.foot{
     <button class="tab-btn active" data-tab="overview"><span class="num">01</span><span class="lbl">Overview</span><span class="sub">Circle Root List</span></button>
     <button class="tab-btn" data-tab="results"><span class="num">02</span><span class="lbl">Results</span><span class="sub">Search by Chest No</span></button>
     <button class="tab-btn" data-tab="judging"><span class="num">03</span><span class="lbl">Judging Sheets</span><span class="sub">All groups · All events</span></button>
-    <button class="tab-btn" data-tab="glance"><span class="num">04</span><span class="lbl">Chest no at a glance</span><span class="sub">Zone-wise table</span></button>
+    <button class="tab-btn" data-tab="glance"><span class="num">04</span><span class="lbl">Chest No At A Glance</span><span class="sub">Zone-wise table</span></button>
   </nav>
 
   <!-- ================= OVERVIEW ================= -->
@@ -363,7 +363,7 @@ footer.foot{
 
   <!-- ================= GLANCE ================= -->
   <section class="panel" id="panel-glance">
-    <div class="section-title"><h2>04 · Chest no at a glance</h2><span>Same layout as the sheet — one row per Group / Gender / Event, one column per zone</span></div>
+    <div class="section-title"><h2>04 · Chest No At A Glance</h2><span>Same layout as the sheet — one row per Group / Gender / Event, one column per zone</span></div>
     <div class="btn-row">
       <button class="btn print sm" id="btnExportGlancePdf">🖨 Print (Landscape)</button>
       <button class="btn pdf sm" id="btnDownloadGlancePdf">📕 Download PDF</button>
@@ -688,23 +688,25 @@ function openJudgeModal(c){
   document.getElementById('judgeSheetContent').innerHTML = `
     <div class="js-title">${c.group} ${c.gender} ${c.event}</div>
     <div class="js-sub">Khanakul West Circle Sports &middot; Judging Sheet</div>
-    ${tableHtml}
+    <div style="width: 100%; overflow-x: auto; margin-bottom: 15px;">
+        ${tableHtml}
+    </div>
     ${positionAndSignatureBlock()}
   `;
   document.getElementById('judgeModal').classList.add('show');
 }
 
-const ZONES = ['Thaku 1','Thaku 2','Ghosh Uttar','Ghosh Madhya','Ghosh Paschim','Kishor 1','Kishor 2'];
+const ZONES = ['Thakuranichak 1','Thakuranichak 2','Ghoshpur Uttar','Ghoshpur Madhya','Ghoshpur Paschim','Kishorepur 1','Kishorepur 2'];
 function canonicalZone(raw){
   if(!raw) return 'Other';
   const l = raw.toLowerCase();
-  if(l.includes('thaku')){ if(l.includes('1')) return 'Thaku 1'; if(l.includes('2')) return 'Thaku 2'; }
+  if(l.includes('thaku')){ if(l.includes('1')) return 'Thakuranichak 1'; if(l.includes('2')) return 'Thakuranichak 2'; }
   if(l.includes('ghosh') || l.startsWith('gh')){
-    if(l.includes('uttar')) return 'Ghosh Uttar';
-    if(l.includes('madh')) return 'Ghosh Madhya';
-    if(l.includes('pasch') || l.includes('pashch')) return 'Ghosh Paschim';
+    if(l.includes('uttar')) return 'Ghoshpur Uttar';
+    if(l.includes('madh')) return 'Ghoshpur Madhya';
+    if(l.includes('pasch') || l.includes('pashch')) return 'Ghoshpur Paschim';
   }
-  if(l.includes('kishor')){ if(l.includes('1')) return 'Kishor 1'; if(l.includes('2')) return 'Kishor 2'; }
+  if(l.includes('kishor')){ if(l.includes('1')) return 'Kishorepur 1'; if(l.includes('2')) return 'Kishorepur 2'; }
   return 'Other';
 }
 
