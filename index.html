@@ -501,8 +501,8 @@ function renderPersonCards(){
   let list = PEOPLE.filter(p=>{
     if(g && p.group!==g) return false;
     if(ge && p.gender!==ge) return false;
-    if(q && !((p.name||'').toLowerCase().includes(q) || (p.school||'').toLowerCase().includes(q))) return false;
-    return true;
+    if(q && !((p.name||'').toLowerCase().includes(q) || (p.school||'').toLowerCase().includes(q) || String(p.chest||'').toLowerCase().includes(q))) return false;
+
   });
   document.getElementById('pcardGrid').innerHTML = list.map((p,i)=>{
     const c1 = CARD_PALETTE[i % CARD_PALETTE.length];
