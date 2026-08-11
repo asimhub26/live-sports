@@ -694,11 +694,11 @@ function openJudgeModal(c){
   document.getElementById('judgeModal').classList.add('show');
 }
 
-const ZONES = ['Thaku 1','Thakuranichak 2','Ghoshpur Uttar','Ghoshpur Madhya','Ghoshpur Paschim','Kishorepur 1','Kishorepur 2'];
+const ZONES = ['Thaku 1','Thaku 2','Ghoshpur Uttar','Ghoshpur Madhya','Ghoshpur Paschim','Kishorepur 1','Kishorepur 2'];
 function canonicalZone(raw){
   if(!raw) return 'Other';
   const l = raw.toLowerCase();
-  if(l.includes('thaku')){ if(l.includes('1')) return 'Thaku 1'; if(l.includes('2')) return 'Thakuranichak 2'; }
+  if(l.includes('thaku')){ if(l.includes('1')) return 'Thaku 1'; if(l.includes('2')) return 'Thaku 2'; }
   if(l.includes('ghosh') || l.startsWith('gh')){
     if(l.includes('uttar')) return 'Ghoshpur Uttar';
     if(l.includes('madh')) return 'Ghoshpur Madhya';
