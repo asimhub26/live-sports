@@ -187,7 +187,15 @@ nav.tabs{
 .btn.primary{background:var(--navy-2); color:#fff; border-color:var(--navy-2);}
 .btn.primary:hover{background:var(--navy);}
 .btn.gold{background:var(--marigold); color:var(--navy); border-color:var(--marigold); font-weight:700;}
+
 .btn.gold:hover{background:var(--marigold-2);}
+.btn.excel{background:#218838; color:#fff; border-color:#218838; font-weight:700;}
+.btn.excel:hover{background:#1e7e34; border-color:#1e7e34;}
+.btn.pdf{background:#c82333; color:#fff; border-color:#c82333; font-weight:700;}
+.btn.pdf:hover{background:#bd2130; border-color:#bd2130;}
+.btn.print{background:#ffc107; color:#1F2430; border-color:#ffc107; font-weight:700;}
+.btn.print:hover{background:#e0a800; border-color:#e0a800;}
+
 .btn.sm{padding:7px 12px;font-size:12.5px;}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
 
@@ -337,9 +345,9 @@ footer.foot{
       <button class="btn primary" id="btnSearchResult">Search</button>
       <button class="btn" id="btnClearResult">Show All Results</button>
       <div style="flex:1"></div>
-      <button class="btn gold sm" id="btnExportResultPdf">🖨 Print (Landscape)</button>
-      <button class="btn gold sm" id="btnDownloadResultPdf">⬇ Download PDF</button>
-      <button class="btn sm" id="btnExportResultXlsx">⬇ Excel</button>
+      <button class="btn print sm" id="btnExportResultPdf">🖨 Print (Landscape)</button>
+      <button class="btn pdf sm" id="btnDownloadResultPdf">📕 Download PDF</button>
+      <button class="btn excel sm" id="btnExportResultXlsx">📗 Excel</button>
     </div>
     <div class="result-hero" id="resultHero"></div>
     <div class="card" style="padding:0;overflow:auto;">
@@ -357,9 +365,9 @@ footer.foot{
   <section class="panel" id="panel-glance">
     <div class="section-title"><h2>04 · Chest No At A Glance</h2><span>Same layout as the sheet — one row per Group / Gender / Event, one column per zone</span></div>
     <div class="btn-row">
-      <button class="btn gold sm" id="btnExportGlancePdf">🖨 Print (Landscape)</button>
-      <button class="btn gold sm" id="btnDownloadGlancePdf">⬇ Download PDF</button>
-      <button class="btn sm" id="btnExportGlanceXlsx">⬇ Excel</button>
+      <button class="btn print sm" id="btnExportGlancePdf">🖨 Print (Landscape)</button>
+      <button class="btn pdf sm" id="btnDownloadGlancePdf">📕 Download PDF</button>
+      <button class="btn excel sm" id="btnExportGlanceXlsx">📗 Excel</button>
     </div>
     <div class="card" style="padding:0;overflow:auto;">
       <table id="glanceTable"><thead></thead><tbody></tbody></table>
@@ -372,8 +380,8 @@ footer.foot{
     <button class="modal-close" id="closeJudgeModal">✕</button>
     <div id="judgeSheetContent"></div>
     <div class="btn-row" style="justify-content:center;margin-top:18px;">
-      <button class="btn gold" id="btnPrintJudge">🖨 Print (Landscape)</button>
-      <button class="btn gold" id="btnDownloadJudgePdf">⬇ Download PDF</button>
+      <button class="btn print" id="btnPrintJudge">🖨 Print (Landscape)</button>
+      <button class="btn pdf" id="btnDownloadJudgePdf">📕 Download PDF</button>
     </div>
   </div>
 </div>
