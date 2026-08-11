@@ -399,6 +399,371 @@ let gsInterval = null;
 
 /* ============ DUAL SYNC GOOGLE SHEET LINKS ============ */
 const URL_ROOT_LIST = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTd71kKo-R-hjOn0KT1YK2XBCSkek_njxrRDhiqNW34lA2jb81g9F1y7c_Poj7t9pZuAVY9KIgc-011/pub?gid=1451925952&single=true&output=csv";
+const URL_RESULTS = "https://docs.google.com/spreadshee}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px;}
+
+header.top{
+  background:linear-gradient(135deg,var(--navy) 0%, var(--navy-2) 65%, #234A82 100%);
+  color:#fff;
+  padding:28px 0 22px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:5px solid var(--marigold);
+}
+header.top::after{
+  content:"";
+  position:absolute; right:-60px; top:-60px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle, rgba(242,169,60,0.35), transparent 70%);
+}
+.header-inner{max-width:1180px;margin:0 auto;padding:0 20px;position:relative;z-index:1;
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:space-between;}
+.brand{display:flex;align-items:center;gap:14px;}
+.bib{
+  width:56px;height:56px;border-radius:10px;
+  background:var(--marigold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo Da 2',sans-serif;font-weight:800;font-size:22px;
+  color:var(--navy); box-shadow:0 4px 0 rgba(0,0,0,0.15), inset 0 0 0 2px rgba(255,255,255,0.5);
+  transform:rotate(-4deg);
+  flex-shrink:0;
+}
+.brand h1{
+  font-family:'Baloo Da 2',sans-serif;
+  font-size:24px; font-weight:700; margin:0; letter-spacing:.2px;
+}
+.brand p{margin:2px 0 0; font-size:13.5px; color:#D9E2F5; font-weight:500;}
+.meta-chip{
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
+  padding:8px 14px;border-radius:999px;font-size:12.5px;color:#EFF3FC;
+  display:flex; gap:8px; align-items:center;
+}
+.meta-chip b{color:#fff;}
+.meta-row{display:flex;gap:10px;flex-wrap:wrap;}
+
+nav.tabs{
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin:-20px auto 26px; max-width:1180px; padding:0 20px;
+  position:relative; z-index:2;
+}
+.tab-btn{
+  flex:1 1 150px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:14px 14px 12px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  text-align:left;
+  font-family:'Hind Siliguri',sans-serif;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s;
+  position:relative;
+}
+.tab-btn:hover{transform:translateY(-2px);}
+.tab-btn .num{
+  font-family:'IBM Plex Sans',monospace; font-size:11px; color:var(--marigold);
+  font-weight:700; letter-spacing:1px;
+}
+.tab-btn .lbl{display:block;font-weight:700;font-size:15px;margin-top:2px;color:var(--navy);}
+.tab-btn .sub{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
+.tab-btn.active{
+  border-color:var(--marigold);
+  background:linear-gradient(180deg, #FFF9EF, #fff);
+  box-shadow:0 0 0 2px rgba(224,141,44,0.25), var(--shadow);
+}
+.tab-btn.active .num{color:var(--track-green);}
+
+.panel{display:none;animation:fade .25s ease;}
+.panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+.section-title{
+  display:flex;align-items:baseline;gap:10px;margin:2px 0 16px;
+}
+.section-title h2{font-family:'Baloo Da 2',sans-serif;font-size:21px;color:var(--navy);margin:0;}
+.section-title span{font-size:12.5px;color:var(--ink-soft);}
+
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:20px;
+}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:20px;}
+.stat{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--marigold);}
+.stat b{font-family:'Baloo Da 2',sans-serif;font-size:28px;color:var(--navy);display:block;}
+.stat span{font-size:12.5px;color:var(--ink-soft);}
+
+.stat-grid.colorful .stat{color:#fff;border:none;padding:16px 18px;}
+.stat-grid.colorful .stat::before{display:none;}
+.stat-grid.colorful .stat span{color:rgba(255,255,255,0.85);font-weight:600;font-size:12px;order:-1;display:block;margin-bottom:4px;}
+.stat-grid.colorful .stat b{color:#fff;order:1;}
+.stat-grid.colorful .stat{display:flex;flex-direction:column;}
+.stat-c0{background:linear-gradient(135deg,#2E6FE0,#3B82F6);}
+.stat-c1{background:linear-gradient(135deg,#D9622B,#E08D2C);}
+.stat-c2{background:linear-gradient(135deg,#4C7A1F,#6E9C33);}
+.stat-c3{background:linear-gradient(135deg,#B8366B,#C24E82);}
+.stat-c4{background:linear-gradient(135deg,#5E4EBF,#7B68C8);}
+.stat-c5{background:linear-gradient(135deg,#12294F,#1B3A6B);}
+
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.filter-row select{min-width:140px;}
+.filter-row input{flex:1;min-width:200px;}
+
+.pcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:8px;}
+.pcard{
+  border-radius:16px; padding:16px 16px 14px; color:#fff; position:relative; overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,0.12); min-height:150px; display:flex; flex-direction:column;
+}
+.pcard .avatar{
+  width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.25);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;
+  margin-bottom:10px; flex-shrink:0; font-family:'IBM Plex Sans',sans-serif;
+}
+.pcard .pname{font-family:'Baloo Da 2',sans-serif;font-weight:700;font-size:16.5px;line-height:1.25;margin-bottom:4px;}
+.pcard .pmeta{font-size:11.5px;color:rgba(255,255,255,0.88);margin-bottom:2px;}
+.pcard .pclass{font-size:12.5px;font-weight:700;margin:4px 0;color:#fff;}
+.pcard .pevents{font-size:12.5px;font-weight:700;margin-top:auto;margin-bottom:8px;line-height:1.4;}
+.pcard .ptag{
+  align-self:flex-start; background:rgba(255,255,255,0.22); padding:4px 10px; border-radius:999px;
+  font-size:10.5px; font-weight:700; letter-spacing:.3px;
+}
+
+.bars{display:flex;flex-direction:column;gap:10px;}
+.bar-row{display:flex;align-items:center;gap:10px;font-size:13px;}
+.bar-row .lbl{width:110px;flex-shrink:0;color:var(--ink-soft);}
+.bar-track{flex:1;background:#EFEAE0;border-radius:6px;height:14px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--navy-2),var(--marigold));border-radius:6px;}
+.bar-row .val{width:36px;text-align:right;font-weight:600;color:var(--navy);}
+
+.two-col{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;}
+@media(max-width:820px){.two-col{grid-template-columns:1fr;}}
+
+.btn{
+  font-family:'Hind Siliguri',sans-serif; font-weight:600; font-size:13.5px;
+  padding:10px 16px; border-radius:10px; border:1px solid var(--line);
+  background:#fff; color:var(--navy); cursor:pointer; display:inline-flex; align-items:center; gap:7px;
+  transition:all .15s;
+}
+.btn:hover{border-color:var(--navy-2);}
+.btn.primary{background:var(--navy-2); color:#fff; border-color:var(--navy-2);}
+.btn.primary:hover{background:var(--navy);}
+.btn.gold{background:var(--marigold); color:var(--navy); border-color:var(--marigold); font-weight:700;}
+
+.btn.gold:hover{background:var(--marigold-2);}
+.btn.excel{background:#218838; color:#fff; border-color:#218838; font-weight:700;}
+.btn.excel:hover{background:#1e7e34; border-color:#1e7e34;}
+.btn.pdf{background:#c82333; color:#fff; border-color:#c82333; font-weight:700;}
+.btn.pdf:hover{background:#bd2130; border-color:#bd2130;}
+.btn.print{background:#ffc107; color:#1F2430; border-color:#ffc107; font-weight:700;}
+.btn.print:hover{background:#e0a800; border-color:#e0a800;}
+
+.btn.sm{padding:7px 12px;font-size:12.5px;}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+
+input[type=text],input[type=number],select{
+  font-family:'IBM Plex Sans',sans-serif; padding:10px 12px; border-radius:9px;
+  border:1px solid var(--line); font-size:13.5px; background:#fff; color:var(--ink);
+}
+input[type=text]:focus,select:focus{outline:2px solid var(--marigold); outline-offset:1px;}
+label.f{font-size:12px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:4px;}
+
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{
+  background:var(--navy); color:#fff; text-align:left; padding:9px 10px;
+  font-weight:600; font-size:11.5px; letter-spacing:.3px; text-transform:uppercase;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+th:first-child{border-radius:8px 0 0 0;} th:last-child{border-radius:0 8px 0 0;}
+td{padding:8px 10px; border-bottom:1px solid var(--line); font-family:'IBM Plex Sans',sans-serif;}
+tbody tr:nth-child(even){background:#FAF7EF;}
+tbody tr:hover{background:#FFF3DF;}
+.pos-badge{
+  display:inline-block; min-width:34px; text-align:center; padding:2px 8px; border-radius:999px;
+  font-weight:700; font-size:11.5px;
+}
+.pos-1{background:#FCEBC7;color:#8A5A00;} .pos-2{background:#E7ECF5;color:#3E4C66;}
+.pos-3{background:#F5E0D3;color:#8A4321;}
+
+.empty{padding:26px;text-align:center;color:var(--ink-soft);font-size:13.5px;}
+
+.result-search{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:18px;}
+.result-hero{
+  border:2px dashed var(--marigold); border-radius:var(--radius); padding:18px; margin-bottom:18px;
+  background:linear-gradient(180deg,#FFFBF3,#fff); display:none;
+}
+.result-hero.show{display:block;}
+.result-hero .rh-name{font-family:'Baloo Da 2',sans-serif;font-size:20px;color:var(--navy);}
+.result-hero .rh-meta{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+.result-hero .rh-list{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;}
+.rh-item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:150px;}
+.rh-item .ev{font-size:11.5px;color:var(--ink-soft);}
+.rh-item .pos{font-family:'Baloo Da 2',sans-serif;font-size:16px;margin-top:2px;}
+
+.judge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+.judge-card{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;
+  transition:all .15s; box-shadow:var(--shadow);
+}
+.judge-card:hover{border-color:var(--marigold);transform:translateY(-2px);}
+.judge-card .g{font-family:'Baloo Da 2',sans-serif;color:var(--navy);font-size:15px;font-weight:700;}
+.judge-card .e{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+.judge-card .n{margin-top:8px;font-size:11px;color:var(--marigold);font-weight:700;}
+
+#judgeModal{
+  position:fixed;inset:0;background:rgba(18,24,32,0.55);display:none;align-items:flex-start;justify-content:center;
+  z-index:50; padding:30px 14px; overflow:auto;
+}
+#judgeModal.show{display:flex;}
+.modal-inner{background:#fff;max-width:760px;width:100%;border-radius:12px;padding:26px 30px;position:relative;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink-soft);}
+.js-title{font-family:'Baloo Da 2',sans-serif;color:var(--navy);font-size:19px;text-align:center;border-bottom:2px solid var(--navy);padding-bottom:10px;margin-bottom:14px;}
+.js-sub{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-bottom:14px;}
+.zonewrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px;}
+.zonebox{border:1px solid var(--line);border-radius:8px;padding:8px 10px;}
+.zonebox b{display:block;font-size:12px;color:var(--navy);margin-bottom:3px;}
+.zonebox span{font-size:12px;color:var(--ink-soft);}
+.judge-tbl{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12.5px;}
+.judge-tbl th,.judge-tbl td{border:1px solid #333;padding:6px 8px;text-align:center;}
+.judge-tbl thead th{background:#F0F0F0;font-weight:700;color:var(--navy);}
+.judge-tbl td:first-child{text-align:left;font-weight:600;background:#FAFAFA;}
+.js-positions{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.js-pos-row{display:flex;align-items:center;gap:10px;border-bottom:1px dotted var(--line);padding-bottom:8px;}
+.js-pos-row .pn{width:38px;font-weight:700;color:var(--marigold);font-family:'Baloo Da 2',sans-serif;}
+.js-pos-row .ln{flex:1;border-bottom:1px solid #999;height:20px;}
+.js-sign{margin-top:22px;display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);}
+.js-sign div{border-top:1px solid #999;padding-top:6px;width:200px;text-align:center;}
+
+footer.foot{
+  text-align:center;padding:26px 0 10px;color:var(--ink-soft);font-size:12px;
+}
+
+@media print{
+  header.top, nav.tabs, .btn-row, .result-search, #judgeModal .modal-close{display:none !important;}
+  body{background:#fff;}
+  .wrap{padding:0;max-width:100%;}
+  .panel{display:none !important;}
+  .panel.print-target{display:block !important;}
+  @page{size:A4 landscape;margin:14mm;}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="bib">27</div>
+      <div>
+        <h1>Khanakul West Circle Sports</h1>
+        <p>JHARUA EVERGREEN SPORTING CLUB FOOTBALL MAAYDAN · Season 2025–26</p>
+      </div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-chip">Date · <b>19 December, 2025</b></div>
+      <div class="meta-chip">Total Participants · <b id="hdrTotal">—</b></div>
+      <button onclick="adminLogin()" class="btn gold sm" style="margin-left: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">🔒 Admin Entry</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="overview"><span class="num">01</span><span class="lbl">Overview</span><span class="sub">Circle Root List</span></button>
+    <button class="tab-btn" data-tab="results"><span class="num">02</span><span class="lbl">Results</span><span class="sub">Search by Chest No</span></button>
+    <button class="tab-btn" data-tab="judging"><span class="num">03</span><span class="lbl">Judging Sheets</span><span class="sub">All groups · All events</span></button>
+    <button class="tab-btn" data-tab="glance"><span class="num">04</span><span class="lbl">Chest No At A Glance</span><span class="sub">Zone-wise table</span></button>
+  </nav>
+
+  <!-- ================= OVERVIEW ================= -->
+  <section class="panel active" id="panel-overview">
+    <div class="section-title"><h2>01 · Overview</h2><span>Participant list from Circle Root List</span></div>
+    <div class="stat-grid colorful" id="statGrid"></div>
+    <div class="filter-row">
+      <select id="fltGroup"><option value="">All Groups</option></select>
+      <select id="fltGender"><option value="">All</option><option value="BOYS">BOYS</option><option value="GIRLS">GIRLS</option></select>
+      <input type="text" id="fltSearch" placeholder="Search name, school or chest no...">
+    </div>
+    <div class="pcard-grid" id="pcardGrid"></div>
+    <div class="two-col" style="margin-top:22px;">
+      <div class="card">
+        <div style="font-weight:700;color:var(--navy);margin-bottom:10px;">Participants by Group</div>
+        <div class="bars" id="groupBars"></div>
+      </div>
+      <div class="card">
+        <div style="font-weight:700;color:var(--navy);margin-bottom:10px;">Participants by Zone</div>
+        <div class="bars" id="zoneBars"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="panel" id="panel-results">
+    <div class="section-title"><h2>02 · Results</h2><span>Enter a Chest No to see that candidate's result</span></div>
+    <div class="result-search">
+      <div>
+        <label class="f">Chest No</label>
+        <input type="text" id="chestSearch" placeholder="e.g. 5" style="width:160px;">
+      </div>
+      <button class="btn primary" id="btnSearchResult">Search</button>
+      <button class="btn" id="btnClearResult">Show All Results</button>
+      <div style="flex:1"></div>
+      <button class="btn print sm" id="btnExportResultPdf">🖨 Print (Landscape)</button>
+      <button class="btn pdf sm" id="btnDownloadResultPdf">📕 Download PDF</button>
+      <button class="btn excel sm" id="btnExportResultXlsx">📗 Excel</button>
+    </div>
+    <div class="result-hero" id="resultHero"></div>
+    <div class="card" style="padding:0;overflow:auto;">
+      <table id="resultTable"><thead></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <!-- ================= JUDGING ================= -->
+  <section class="panel" id="panel-judging">
+    <div class="section-title"><h2>03 · Judging Sheets</h2><span>Printable sheet for every group and event</span></div>
+    <div class="judge-grid" id="judgeGrid"></div>
+  </section>
+
+  <!-- ================= GLANCE ================= -->
+  <section class="panel" id="panel-glance">
+    <div class="section-title"><h2>04 · Chest No At A Glance</h2><span>Same layout as the sheet — one row per Group / Gender / Event, one column per zone</span></div>
+    <div class="btn-row">
+      <button class="btn print sm" id="btnExportGlancePdf">🖨 Print (Landscape)</button>
+      <button class="btn pdf sm" id="btnDownloadGlancePdf">📕 Download PDF</button>
+      <button class="btn excel sm" id="btnExportGlanceXlsx">📗 Excel</button>
+    </div>
+    <div class="card" style="padding:0;overflow:auto;">
+      <table id="glanceTable"><thead></thead><tbody></tbody></table>
+    </div>
+  </section>
+</div>
+
+<div id="judgeModal">
+  <div class="modal-inner">
+    <button class="modal-close" id="closeJudgeModal">✕</button>
+    <div id="judgeSheetContent"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:18px;">
+      <button class="btn print" id="btnPrintJudge">🖨 Print (Landscape)</button>
+      <button class="btn pdf" id="btnDownloadJudgePdf">📕 Download PDF</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; font-size:12.5px; padding: 10px; color: var(--ink-soft); background:#F1F6FF; border-top:1px solid #CBD9F2;" id="gsStatus">Connecting to live data...</div>
+<footer class="foot">Khanakul West Circle Sports Dashboard &middot; built for local/offline use</footer>
+
+<script>
+/* ============ INITIAL FALLBACK DATA ============ */
+let PARTICIPANTS = [{"chest": 1, "name": "RISHAV MANNA", "father": "DEBASHIS MANNA", "dob": "2019-03-18", "cls": "CLASS PP", "school": "THAKURANICHAK SARASWATI PRIMARY SCHOOL", "group": "A", "gender": "BOYS", "event": "SUTTLE RACE", "zone": "Thakuranichak1"}];
+let RESULT_TEMPLATE = [{"group": "A", "gender": "BOYS", "event": "SUTTLE RACE", "position": "1st", "chest": 5, "name": "ANKUSH MONDAL", "father": "TANMOY MONDAL", "dob": "2017-01-01", "cls": "CLASS III", "school": "THAKURANICHAK BINPANI PRIMARY SCHOOL", "zone": "Thakuranichak1"}];
+
+let liveResults = null;
+let gsInterval = null;
+
+/* ============ DUAL SYNC GOOGLE SHEET LINKS ============ */
+const URL_ROOT_LIST = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTd71kKo-R-hjOn0KT1YK2XBCSkek_njxrRDhiqNW34lA2jb81g9F1y7c_Poj7t9pZuAVY9KIgc-011/pub?gid=1451925952&single=true&output=csv";
 const URL_RESULTS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTd71kKo-R-hjOn0KT1YK2XBCSkek_njxrRDhiqNW34lA2jb81g9F1y7c_Poj7t9pZuAVY9KIgc-011/pub?gid=1510107305&single=true&output=csv";
 
 
