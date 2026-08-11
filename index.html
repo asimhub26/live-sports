@@ -694,17 +694,17 @@ function openJudgeModal(c){
   document.getElementById('judgeModal').classList.add('show');
 }
 
-const ZONES = ['Thaku 1','Thaku 2','Gh Uttar','Gh Madhya','Gh Paschim','Kishore 1','Kishore 2'];
+const ZONES = ['Thaku 1','Thaku 2','Gh Uttar','Gh Madhya','Gh Paschim','Kishor 1','Kishor 2'];
 function canonicalZone(raw){
   if(!raw) return 'Other';
   const l = raw.toLowerCase();
-  if(l.includes('thaku')){ if(l.includes('1')) return 'Thakuranichak 1'; if(l.includes('2')) return 'Thakuranichak 2'; }
+  if(l.includes('thaku')){ if(l.includes('1')) return 'Thaku 1'; if(l.includes('2')) return 'Thaku 2'; }
   if(l.includes('ghosh') || l.startsWith('gh')){
-    if(l.includes('uttar')) return 'Ghoshpur Uttar';
-    if(l.includes('madh')) return 'Ghoshpur Madhya';
-    if(l.includes('pasch') || l.includes('pashch')) return 'Ghoshpur Paschim';
+    if(l.includes('uttar')) return 'Gh Uttar';
+    if(l.includes('madh')) return 'Gh Madhya';
+    if(l.includes('pasch') || l.includes('pashch')) return 'Gh Paschim';
   }
-  if(l.includes('kishor')){ if(l.includes('1')) return 'Kishorepur 1'; if(l.includes('2')) return 'Kishorepur 2'; }
+  if(l.includes('kishor')){ if(l.includes('1')) return 'Kishor 1'; if(l.includes('2')) return 'Kishor 2'; }
   return 'Other';
 }
 
