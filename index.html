@@ -738,6 +738,57 @@ document.getElementById('btnExportResultPdf').addEventListener('click', ()=>prin
 document.getElementById('btnExportGlancePdf').addEventListener('click', ()=>printPanel('panel-glance'));
 document.getElementById('btnPrintJudge').addEventListener('click', ()=> window.print());
 
+
+function exportToPDF(containerId, filename) {
+  const container = document.getElementById(containerId);
+  const noPrintElements = container.querySelectorAll('.btn-row, .result-search, .filter-row');
+  
+  // hide UI elements
+  noPrintElements.forEach(el => el.style.display = 'none');
+
+  const opt = {
+    margin:       10,
+    filename:     filename,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+  };
+
+  html2pdf().set(opt).from(container).save().then(() => {
+    // restore UI elements
+    noPrintElements.forEach(el => el.style.display = '');
+  });
+}
+
+document.getElementById('btnDownloadResultPdf').addEventListener('click', ()=> {
+  exportToPDF('panel-results', 'Results.pdf');
+});
+document.getElementById('btnDownloadGlancePdf').addEventListener('click', ()=> {
+  exportToPDF('panel-glance', 'Chest_No_At_A_Glance.pdf');
+});
+
+document.getElementById('btnDownloadJudgePdf').addEventListener('click', ()=> {
+  const container = document.querySelector('.modal-inner');
+  const closeBtn = document.getElementById('closeJudgeModal');
+  const printBtnRow = document.querySelector('.modal-inner .btn-row');
+  
+  closeBtn.style.display = 'none';
+  if(printBtnRow) printBtnRow.style.display = 'none';
+
+  const opt = {
+    margin:       10,
+    filename:     'Judging_Sheet.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+  };
+
+  html2pdf().set(opt).from(container).save().then(() => {
+    closeBtn.style.display = '';
+    if(printBtnRow) printBtnRow.style.display = 'flex';
+  });
+});
+
 function exportTableToXlsx(tableEl, filename){
   const wb = XLSX.utils.table_to_book(tableEl, {sheet:"Sheet1"});
   XLSX.writeFile(wb, filename);
